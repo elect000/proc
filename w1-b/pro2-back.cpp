@@ -37,21 +37,21 @@ int main()
       cv[k] = ct; // cv[k] <- a
       iv[k] = it; // iv[k] <- 3
     }
-    cin.ignore(); // If we add here, this code is accepted.
     cin >> k;
     k2 = k;
     string s;
     int sum = 0; // sum of money
-    int ssize = 0;
     getline(cin, s);
-    while (k--) { // lines
+    while (k--) {
+      stringstream ss;
       getline(cin, s);
-      ssize = s.size();
-      for (int i = 0; i < ssize; ++i) {
-        sum += check(s[i], k1);
+      ss << s;
+      while(ss >> ct){
+        sum += check(ct, k1);
       }
     }
-    printf("%0.2lf$\n", (((double) sum) / 100));
+    cout << fixed;
+    cout << setprecision (2) << (((float)sum) / 100) << "$" <<  endl;
   }
   return 0;
 }

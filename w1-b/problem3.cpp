@@ -43,12 +43,3 @@ int main()
   return 0;
 }
 
-// OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-// <- i j dead
-//
-// OOOOXXXXXXXXXXXXXXXOOOOOOOOOOO
-// XXXXXXXXXXXXXXXXXXXOOOOOOOOOOO => end
-// ^
-// or
-// OOOOXXXXXXXXXXXXXXXXXXXXXXXXXX => end
-//                              ^

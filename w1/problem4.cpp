@@ -1,63 +1,72 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
+// Grid Successors
+#include <stdio.h>
 using namespace std;
 
-vector<int> heads;
-vector<int> knights;
-void check(int, int);
-void check(int nh, int nk) {
-  if (nh > nk) {
-    cout << "Loowater is doomed!" << endl;
-  } else {
-    int sum = 0, i = 0, j = 0;
-    while (true) {
-      if (i >= nh) {
-        cout << sum << endl;
-        break;
-      }
-      if (j >= nk) {
-        cout << "Loowater is doomed!" << endl;
-        return;
-      }
-      if (heads [i] <= knights [j]) {
-        sum += knights [j];
-        i++;
-        j++;
-      } else {
-        j++;
-        continue;
-      }
-    }
-    return;
-  }
+int g[5][5];
+int f[5][5];
 
+void init ();
+void func ();
+bool isnotfinite ();
+
+void init ()
+{
+  for (int i = 0; i < 5; ++i) {
+    for (int j = 0; j < 5; ++j) {
+      g [i] [j] = 0;
+      f [i] [j] = 0;
+    }
+  }
 }
+void func ()
+{
+  // calculate
+  for (int i = 1; i < 4; ++i) {
+    for (int j = 1; j < 4; ++j) {
+      f [i] [j] =
+        (g [i] [j + 1]
+         + g [i + 1] [j]
+         + g [i - 1] [j]
+         + g [i] [j - 1]) ;
+    }
+  }
+  // update
+  for (int i = 1; i < 4; ++i) {
+    for (int j = 1; j < 4; ++j) {
+      g [i] [j] = (f [i] [j] % 2);
+    }
+  }
+}
+bool isnotfinite ()
+{
+  // calculate
+  for (int i = 1; i < 4; ++i) {
+    for (int j = 1; j < 4; ++j) {
+      if (g [i] [j] > 0) return true;
+    }
+  }
+  return false;
+}
+
 int main()
 {
-  int n_head;
-  int n_knight;
-  int t, nh, nk;
-  while (1) {
-    cin >> n_head >> n_knight;
-    if (n_head == 0 && n_knight == 0) {
-      break;
+  init ();
+  int times;
+  scanf ("%d", &times);
+
+  while (times--) {
+    // input data
+    for (int i = 1; i <= 3; ++i) {
+      for (int j = 1; j <= 3; ++j) {
+        scanf ("%1d", &g [i] [j]);
+      }
     }
-    nh = n_head;
-    nk = n_knight;
-    while (n_head--) {
-      cin >> t;
-      heads.push_back(t);
+    int res = -1;
+    while (isnotfinite ()) {
+      func ();
+      ++res;
     }
-    while (n_knight--) {
-      cin >> t;
-      knights.push_back(t);
-    }
-    sort(heads.begin(),heads.end());
-    sort(knights.begin(),knights.end());
-    check(nh, nk);
-    heads.clear ();
-    knights.clear ();
+    printf ("%d\n", res);
   }
   return 0;
 }
