@@ -107,12 +107,10 @@ void printer (int j, int rank) {
 void show_result (int num_teams) {
   // to sort
   vector<int> vt;
-  for (int i = 0; i < num_teams; ++i) {
+  for (int i = 0; i < num_teams; ++i)
     vt.push_back(i);
-  }
-  for (int i = 0; i < num_teams; ++i) {
+  for (int i = 0; i < num_teams; ++i)
     team_result [i] = team_info [i] [1] * 3 + team_info [i] [2];
-  }
 
   sort(vt.begin(), vt.end(), sorting);
   // to sort
@@ -141,12 +139,8 @@ bool sorting (int a, int b) {
           if (team_info [a] [0] < team_info [b] [0]) return true;
           else if (team_info [a] [0] == team_info [b] [0]) {
             string as = teams[a], bs = teams[b];
-            for (char& c: as) {
-              c = tolower(c);
-            }
-            for (char& c: bs) {
-              c = tolower(c);
-            }
+            for (char& c: as) c = tolower(c);
+            for (char& c: bs) c = tolower(c);
             if (as.compare (bs) < 0) return true;
           }
         }
@@ -185,14 +179,12 @@ int main()
     int battles;
     scanf ("%d", &battles);
     getline (cin, dummy);
-    for (int i = 0; i < battles; ++i) {
+    for (int i = 0; i < battles; ++i)
       read_battles(num_teams);
-    }
     show_result(num_teams);
     v.clear ();
-    if(times != 0) {
+    if(times != 0)
       printf ("\n");
-    }
   }
   return 0;
 }

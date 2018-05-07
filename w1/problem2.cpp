@@ -13,9 +13,7 @@ int check(char,int);
 
 int check(char c, int k) {
   for (int i = 0; i < k; ++i) {
-    if (cv[i] == c) {
-      return iv[i];
-    }
+    if (cv[i] == c) return iv[i];
   }
   return 0;
 }

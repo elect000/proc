@@ -31,11 +31,8 @@ int main()
           ++sum;
           ++pos;
           break;
-        } else if (jack_list [pos] > t) {
-          break;
-        } else {
-          ++pos;
-        }
+        } else if (jack_list [pos] > t) break;
+         else ++pos;
       }
     }
     printf ("%d\n", sum);
