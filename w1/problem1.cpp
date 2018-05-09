@@ -16,7 +16,7 @@ void check () {
   int t;
   for (int i = 0; i < times - 1; ++i) {
     t = abs(v[i] - v[i + 1]);
-    if (t < 1 || times <= t) {
+    if (t < 1 || times <= t) { //  || times <= t
       cout << "Not jolly" << endl;
       return;
     } else if (s.count (t)) {

@@ -62,19 +62,12 @@ void set_enemies (int x, int y) {
 bool are_friends(int x, int y) {
   int xt = run (x);
   int yt = run (y);
-  // int xnt = run ((x + max_people)
-  //                % (max_people * 2));
-  // int ynt = run ((y + max_people)
-  //                % (max_people * 2));
   if (xt == yt) return true;
   return false;
 }
 
 bool are_enemies (int x, int y) {
   int xt = run (x);
-  // int yt = run (y);
-  // int xnt = run ((x + max_people)
-  //                % (max_people * 2));
   int ynt = run ((y + max_people)
                  % (max_people * 2));
   if (xt == ynt) return true;

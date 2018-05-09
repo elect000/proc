@@ -52,3 +52,12 @@ int main()
 // or
 // OOOOXXXXXXXXXXXXXXXXXXXXXXXXXX => end
 //                              ^
+// 10 4
+// 2  5
+// 6  9
+// 1  1
+// 10 10
+// OXXXXOOOOO 1 6
+// OXXXXXXXXO 1 10
+// XXXXXXXXXO * 10
+// XXXXXXXXXX * *
