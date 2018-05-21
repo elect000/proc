@@ -67,7 +67,8 @@ int main()
           max = v [v.size () - 1];
       }
     }
-    printf ("%d\n\n", max);
+    printf ("%d\n", max);
+    if (times != 0) printf("\n");
   }
   return 0;
 }
