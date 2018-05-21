@@ -1,0 +1,16 @@
+5
+
+O H X Q G
+X<Q O<H H<X Q<G H<G
+
+K D
+K<D
+
+N O T S V J Q C G
+T<C T<V T<J T<S O<C N<C V<C Q<G O<Q J<Q Q<C O<J S<V V<J T<G O<V N<O J<C N<V N<S S<J C<G S<C N<T O<G O<T T<Q O<S
+
+C Z D F Q O M E G V
+O<M Z<Q Q<O M<V D<V F<G O<G Z<E Q<G F<M C<D Z<O D<F D<O Z<D M<G O<E E<V O<V Q<E C<Q Z<F F<O Q<M G<V
+
+E N
+E<N
