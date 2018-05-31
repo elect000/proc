@@ -3,20 +3,22 @@
 #include <string.h>
 
 using namespace std;
-int visited [500010];
-int mp [50010];
-int reached [50010];
+int visited [50000];
+int mp [50000];
+int reached [50000];
 
-int dfs(int i)
+inline int dfs(int i)
 {
-  visited[i] = 1;
-  int r = 0;
-  if ((mp[i] != 0) && (visited[mp[i]] == 0)) {
-    r += dfs(mp[i]) + 1;
+  if (visited[i] == 1
+      ) {
+    return 1;
   }
-  visited[i] = 0;
-  reached[i] = r; // memorize!
-  return r;
+  visited[i] = 1;
+  if (mp[i] == 0) {
+    return 1;
+  } else {
+    return dfs(mp[i]) + 1;
+  }
 }
 
 int main()
@@ -34,16 +36,15 @@ int main()
       scanf("%d %d", &k, &v);
       mp[k] = v;
     }
-
     int max = 0;
-    memset(visited, 0, sizeof(visited));
-    memset(reached, -1, sizeof(reached));
+
     for (int i = 1; i <= elem_num; ++i) {
-      if (reached[i] == -1) {
-        dfs(i);
-      }
-      if (max < reached[i]) {
-        max = reached[i];
+      memset(visited, 0, sizeof(visited));
+      
+      int r = dfs(i);
+      reached [i] = r;
+      if (max < r) {
+        max = r;
         res = i;
       }
     }
