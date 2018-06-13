@@ -35,7 +35,6 @@ int main(){
     scanf ("%d %d", &n, &m);
     init (n, m);
     for (int n_ = 0; n_ < n; ++n_) {
-      // if it would not decrease cost, flag will be false.
       flag = false;
       for (int m_ = 0; m_ < m; ++m_) {
         // -----------------------
