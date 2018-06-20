@@ -12,6 +12,7 @@ struct edge {
   int from, to, cost;
 };
 
+
 int weights[MAX_N];
 edge edges[MAX_M];
 

@@ -1,84 +1,64 @@
-#include <map>
+#include <stdio.h>
 #include <vector>
 #include <algorithm>
 using namespace std;
 
-int gcd (int a, int b) {
-  int t;
-  if (a < 0) a = -a;
-  if (b < 0) b = -b;
-  while (a) {
-    t = a;
-    a = b % a;
-    b = t;
-  }
-  return b;
-}
-
 struct Point {
-  int x, y, z;
-  bool operator<(const Point &a) const {
-    return (long long)x*x + (long long)y*y
-      < (long long)a.x*a.x + (long long)a.y*a.y;
+  int x, y;
+  Point () {};
+  Point (int x_, int y_)
+    :x (x_), y (y_) {};
+};
+
+struct Line {
+  int x1, y1, x2, y2;
+  Line () {};
+  Line (int x1_, int y1_, int x2_, int y2_)
+    : x1(x1_), y1(y1_), x2(x2_), y2(y2_)
+  {};
+  Point fall (Point p) {
+    if (p.x > (x1>x2?x2:x1) && p.x < (x1>x2?x1:x2)) {
+      if ((float) p.y >=
+               (((float) (y2 - y1) / (float) (x2 - x1)) *
+                (float) (p.x  - x1)) + (float) y1) {
+        return Point ((y1>y2?x2:x1), (y1>y2?y2:y1));
+      }
+    }
+    return p;
+  }
+  bool operator<(const Line& l) const {
+    return (y2>y1?y2:y1)>(l.y2>l.y1?l.y2:l.y1);
   }
 };
 
-bool comp (const Point &a, const Point &b) {
-  if (a.x < b.x) return true;
-  if (a.x > b.x) return false;
-  if (a.y < b.y) return true;
-  return false;
-}
+vector<Line> ls;
 
-vector<Point> v;
-map<pair<int, int>, int> m;
-vector<Point> res;
-Point pl [100001];
-
-int main() {
-  int len;
-  int times = 0;
-  while (scanf("%d", &len)) {
-    if (len == 0) break;
-    v.clear();
-    m.clear();
-    res.clear();
-    for (int i = 0; i < len; ++i)
-      scanf("%d %d %d", &pl [i].x, &pl [i].y, &pl [i].z);
-    sort(pl, pl + len);
-    for (int i = 0 ; i < len ; i++) {
-      pair<int, int> pa;
-      if (pl [i].x == 0) {
-        if (pl [i].y < 0) pa = make_pair(0 , -1);
-        else pa = make_pair(0 , 1);
-      } else if (pl [i].y == 0) {
-        if (pl [i].x < 0) pa = make_pair (-1, 0);
-        else pa = make_pair (1, 0);
-      } else {
-        int g = gcd (pl [i].x, pl [i].y);
-        pa = make_pair (pl [i].x/g, pl [i].y/g);
-      }
-      if (m.count(pa)) {
-        if (pl [i].z <= m [pa]) {
-          res.push_back(pl [i]);
-        } else {
-          m [pa] = pl [i].z;
-        }
-      } else {
-        m [pa] = pl [i].z;
-      }
+int main()
+{
+  int times;
+  scanf ("%d", &times);
+  while (times--) {
+    ls.clear ();
+    int lt;
+    scanf ("%d", &lt);
+    while (lt--) {
+      Line l;
+      scanf ("%d %d %d %d", &l.x1, &l.y1, &l.x2, &l.y2);
+      ls.push_back (l);
     }
-    printf ("Data set %d:\n", ++times);
-    if (res.empty ())
-      printf ("All the lights are visible.\n");
-    else {
-      printf ("Some lights are not visible:\n");
-      sort (res.begin (), res.end (), comp);
-      for (int i = 0 ; i < res.size (); ++i) {
-        printf ("x = %d, y = %d", res [i].x, res [i].y);
-        if (i != res.size () - 1) printf (";\n");
-        else printf (".\n");
+    sort (ls.begin (), ls.end ());
+    int pt;
+    Point p;
+    scanf ("%d", &pt);
+    while (pt--) {
+      scanf ("%d %d", &p.x, &p.y);
+      for (Line l: ls) {
+        p = l.fall (p);
       }
+      printf ("%d\n", p.x);
+    }
+    if(times != 0) {
+      printf ("\n");
     }
   }
   return 0;
